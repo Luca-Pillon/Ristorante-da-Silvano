@@ -1,0 +1,16 @@
+{
+  "name": "ristorante-da-silvano",
+  "version": "1.0.0",
+  "description": "Sito web per Ristorante Da Silvano, situato in Via San Martino 42 a San Biagio di Callalta (TV)",
+  "main": "src/index.html",
+  "scripts": {
+    "start": "live-server src",
+    "build": "echo 'Build process not defined yet.'"
+  },
+  "author": "Luca Pillon",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "live-server": "^1.2.1"
+  }
+}
