@@ -1,24 +1,62 @@
 // filepath: ristorante-da-silvano/src/js/main.js
 document.addEventListener('DOMContentLoaded', function() {
-    const menuButton = document.getElementById('menu-button');
-    const contactButton = document.getElementById('contact-button');
+    // Navbar centrale
+    const navHome = document.getElementById('nav-home');
+    const navRistorante = document.getElementById('nav-ristorante');
+    const navMenu = document.getElementById('nav-menu');
+    const navChiSiamo = document.getElementById('nav-chi-siamo');
+    const navOrari = document.getElementById('nav-orari');
+    const navInfoContatti = document.getElementById('nav-info-contatti');
+    const navParcheggio = document.getElementById('nav-parcheggio');
+
+    const homeSection = document.getElementById('home-section');
+    const ristoranteSection = document.getElementById('ristorante-section');
     const menuSection = document.getElementById('menu-section');
-    const contactSection = document.getElementById('contact-section');
+    const chiSiamoSection = document.getElementById('chi-siamo-section');
+    const orariSection = document.getElementById('orari-section');
+    const infoContattiSection = document.getElementById('info-contatti-section');
+    const parcheggioSection = document.getElementById('parcheggio-section');
+    const homeOverlay = document.getElementById('home-overlay');
 
-    menuButton.addEventListener('click', function() {
-        menuSection.scrollIntoView({ behavior: 'smooth' });
+    const navLinks = [
+        { link: navHome, section: homeSection },
+        { link: navChiSiamo, section: chiSiamoSection },
+        { link: navRistorante, section: ristoranteSection },
+        { link: navMenu, section: menuSection },
+        { link: navOrari, section: orariSection },
+        { link: navInfoContatti, section: infoContattiSection },
+        { link: navParcheggio, section: parcheggioSection }
+    ];
+
+    function showSection(section, link) {
+        // Nascondi tutte le sezioni
+        homeSection.style.display = 'none';
+        ristoranteSection.style.display = 'none';
+        menuSection.style.display = 'none';
+        chiSiamoSection.style.display = 'none';
+        orariSection.style.display = 'none';
+        infoContattiSection.style.display = 'none';
+        parcheggioSection.style.display = 'none';
+        // Mostra la sezione selezionata
+        section.style.display = 'block';
+        // Overlay solo in home
+        if (section === homeSection) {
+            homeOverlay.style.display = 'block';
+        } else {
+            homeOverlay.style.display = 'none';
+        }
+        // Aggiorna la classe active
+        navLinks.forEach(obj => obj.link.classList.remove('active'));
+        if (link) link.classList.add('active');
+    }
+
+    navLinks.forEach(obj => {
+        obj.link.addEventListener('click', function(e) {
+            e.preventDefault();
+            showSection(obj.section, obj.link);
+        });
     });
 
-    contactButton.addEventListener('click', function() {
-        contactSection.scrollIntoView({ behavior: 'smooth' });
-    });
-
-    // Mostra l'URL corrente del sito in console
-    console.log('URL del sito:', window.location.href);
-
-    // Se vuoi mostrare l'URL in una sezione della pagina, decommenta e personalizza:
-    // const urlElement = document.getElementById('site-url');
-    // if (urlElement) {
-    //     urlElement.textContent = window.location.href;
-    // }
+    // Mostra la home all'avvio
+    showSection(homeSection, navHome);
 });
