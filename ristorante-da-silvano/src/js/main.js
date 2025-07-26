@@ -1,5 +1,37 @@
 // filepath: ristorante-da-silvano/src/js/main.js
 document.addEventListener('DOMContentLoaded', function() {
+    // Gestione click su "Scopri di più" per mostrare la storia completa
+    const scopriPiuBtn = document.querySelector('a[href="#storia-completa"]');
+    const storiaCompletaSection = document.getElementById('storia-completa');
+    
+    if (scopriPiuBtn) {
+        scopriPiuBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            // Mostra la sezione storia completa
+            storiaCompletaSection.style.display = 'block';
+            // Scrolla fino alla sezione
+            storiaCompletaSection.scrollIntoView({ behavior: 'smooth' });
+        });
+    }
+    
+    // Gestione click su "Torna alla sezione Chi Siamo"
+    document.addEventListener('click', function(e) {
+        // Controlla se il click è su un link che punta a #chi-siamo E siamo nella sezione storia-completa
+        if (e.target.closest('a[href="#chi-siamo"]') && storiaCompletaSection) {
+            e.preventDefault();
+            // Nascondi la sezione storia completa
+            storiaCompletaSection.style.display = 'none';
+            // Mostra la sezione chi-siamo
+            const chiSiamoSection = document.getElementById('chi-siamo');
+            if (chiSiamoSection) {
+                // Aggiungi un piccolo ritardo per assicurarci che la transizione sia fluida
+                setTimeout(() => {
+                    chiSiamoSection.scrollIntoView({ behavior: 'smooth' });
+                }, 50);
+            }
+        }
+    });
+    
     // Navbar centrale
     const navHome = document.getElementById('nav-home');
     const navRistorante = document.getElementById('nav-ristorante');
